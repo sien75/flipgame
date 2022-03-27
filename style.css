@@ -1,0 +1,43 @@
+#header {
+    display: flex;
+    justify-content: center;
+}
+
+#header > * {
+    margin: 0 4px;
+}
+
+#root {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line {
+    display: flex;
+}
+
+.block {
+    height: 50px;
+    width: 50px;
+    background-color: bisque;
+    border: 1px solid grey;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.block-flipped {
+    background-color: aqua;
+}
+
+.resolution-circle {
+    border: 1px solid grey;
+    background-color: aqua;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    pointer-events: none;
+}
