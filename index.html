@@ -1,18 +1,34 @@
 <html>
     <head>
         <title>flip game</title>
-        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <div id="header">
-            <input type="number" id="number" max="9" min="1" value="3">
+            <div id="rows">
+                <button id="rows-minus">-</button>
+                <span id="rows-number">3</span>
+                <button id="rows-plus">+</button>
+            </div>
+            <div id="columns">
+                <button id="columns-minus">-</button>
+                <span id="columns-number">3</span>
+                <button id="columns-plus">+</button>
+            </div>
             <button id="refresh">refresh</button>
             <button id="reveal">reveal</button>
         </div>
         <div id="root"></div>
         <div id="footer">
             <div id="success"></div>
+            <div id="solutions-result">click "reveal" to solve</div>
+            <div>
+                <button id="solutions-previous" disabled>previous</button>
+                <span id="solutions-number"></span>
+                <button id="solutions-next" disabled>next</button>    
+            </div>
         </div>
-        <script src="main.js" type="module"></script>
+        <script src="main/index.js" type="module"></script>
     </body>
 </html>

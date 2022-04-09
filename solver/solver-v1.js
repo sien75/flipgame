@@ -13,7 +13,8 @@ class Solver {
 
         const conditions = this._getConditions(row);
         const combinations = this._getCombinations(conditions.length);
-        return this._check(conditions, combinations, row);
+        const singleSolution = this._check(conditions, combinations, row);
+        return [singleSolution];
     }
 
     _getConditions(length) {
