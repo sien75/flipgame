@@ -22,7 +22,7 @@ class Number {
             ['Minus', 'Plus'].forEach((operation) => {
                 const button = props[`${dimention}${operation}Button`];
                 button.addEventListener('click', () =>
-                    this._initButton({
+                    this._updateButton({
                         dimention,
                         operation,
                         elementName: `${dimention}NumberElement`,
@@ -32,12 +32,12 @@ class Number {
         });
     }
 
-    _initButton({ dimention, operation, elementName }) {
+    _updateButton({ dimention, operation, elementName }) {
         let newValue = 3;
         if(operation === 'Minus') {
             newValue = Math.max(this[dimention] - 1, 1);
         } else {
-            newValue = Math.min(this[dimention] + 1, 9);
+            newValue = Math.min(this[dimention] + 1, 20);
         }
         this[elementName].innerHTML = newValue;
         this[dimention] = parseInt(this[elementName].innerHTML) || 3;

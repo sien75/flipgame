@@ -1,9 +1,17 @@
+import Combinations from './combinations.js';
+
 class Solver {
+    row;
+    column;
+    checker;
+    combinations;
+
     constructor(checker) {
         this.row = 1;
         this.column = 1;
         this.checker = checker;
         this.checker.subscribe(this._syncSuccess);
+        this.combinations = new Combinations();
     }
 
     solve(row, column) {
@@ -12,7 +20,9 @@ class Solver {
         if (row !== column) return [];
 
         const conditions = this._getConditions(row);
-        const combinations = this._getCombinations(conditions.length);
+        const combinations = this.combinations.getCombinations(
+            conditions.length
+        );
         const singleSolution = this._check(conditions, combinations, row);
         return [singleSolution];
     }
@@ -66,76 +76,6 @@ class Solver {
             row: row + 1,
             column: column + 1,
         }));
-    }
-
-    _getCombinations(length, combinationNumber = 1) {
-        if (!length >= 1) return [];
-        if (length === combinationNumber) {
-            return this._getCombinationsInLengthAndNumber(
-                length,
-                combinationNumber
-            );
-        }
-        return [
-            ...this._getCombinationsInLengthAndNumber(
-                length,
-                combinationNumber
-            ),
-            ...this._getCombinations(length, combinationNumber + 1),
-        ];
-    }
-
-    _getCombinationsInLengthAndNumber(length, combinationNumber) {
-        const result = [];
-        let beacons = this._initBeacons(combinationNumber);
-        result.push(beacons);
-        while (
-            !(beacons[beacons.length - 1].current === length - beacons.length)
-        ) {
-            beacons = this._nexeBeacons(beacons, length);
-            result.push(beacons);
-        }
-        return result.map(this._removeMiddle);
-    }
-
-    _initBeacons(number) {
-        return Array(number)
-            .fill()
-            .map((item, index) => ({
-                current: index,
-            }))
-            .reverse();
-    }
-
-    _nexeBeacons(beacons, length) {
-        const shouldMoveBeacon = this._shouldMoveBeacon(beacons, length);
-        const baseIndex = beacons.indexOf(shouldMoveBeacon);
-        return beacons.map((beacon, index) => {
-            if (index <= baseIndex) {
-                return {
-                    current: shouldMoveBeacon.current + baseIndex - index + 1,
-                };
-            }
-            return beacon;
-        });
-    }
-
-    _shouldMoveBeacon(beacons, length) {
-        return beacons.find((beacon) => {
-            const beaconNextCurrent = beacon.current + 1;
-            return (
-                beaconNextCurrent < length &&
-                !this._hasCurrent(beacons, beaconNextCurrent)
-            );
-        });
-    }
-
-    _hasCurrent(beacons, current) {
-        return beacons.some((beacon) => beacon.current === current);
-    }
-
-    _removeMiddle(beacons) {
-        return beacons.map(({ current }) => current).reverse();
     }
 
     _foundResolution = false;

@@ -39,7 +39,7 @@ class Blocks {
 
     _getStyleObjectWhenScreenWidthOverflow(rules) {
         let result = {};
-        if (window.innerWidth < rules[0]?.length * 50) {
+        if (window.innerWidth < rules[0]?.length * 50 + 50) {
             const size = (window.innerWidth - 50) / rules[0].length;
             result = {
                 style: `width: ${size}px; height: ${size}px`,
